@@ -220,4 +220,5 @@ Heavy downward traffic. The Improved algorithm utilized capacity efficiently by 
     *Client runs on http://localhost:3000.*
 
 4.  **Select Scenario:**
+
     Use the top navigation bar to select **"Full Day Cycle"** to replicate the results presented above.
