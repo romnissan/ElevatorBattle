@@ -115,7 +115,7 @@ The following results are derived from the `Simulation Report` outputs generated
 ### 5.1 Cumulative Performance (Full Day Cycle)
 Over the course of the full simulation (approx 1450 ticks), the Improved Algorithm demonstrated significant efficiency gains.
 
-![Full Day Results](full_day_results.png)
+![Full Day Results](ElevatorBattle/full_day_results.png)
  #### Phase 1: Morning Rush
 ![phase Results](phase1.png)
 
@@ -220,4 +220,5 @@ Heavy downward traffic. The Improved algorithm utilized capacity efficiently by 
     *Client runs on http://localhost:3000.*
 
 4.  **Select Scenario:**
+
     Use the top navigation bar to select **"Full Day Cycle"** to replicate the results presented above.
