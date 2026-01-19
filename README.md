@@ -117,22 +117,22 @@ Over the course of the full simulation (approx 1450 ticks), the Improved Algorit
 
 ![Full Day Results](ElevatorBattle/full_day_results.png)
  #### Phase 1: Morning Rush
-![phase Results](phase1.png)
+![phase Results](ElevatorBattle/phase1.png)
 
  #### phase 2: Stress Test
-![phase Results](phase2.png)
+![phase Results](ElevatorBattle/phase2.png)
 
  #### phase 3: Lunch Rush
-![phase Results](phase3.png)
+![phase Results](ElevatorBattle/phase3.png)
 
  #### phase 4: Lunch Return
-![phase Results](phase4.png)
+![phase Results](ElevatorBattle/phase4.png)
 
  #### phase 5: Stress Test
- ![phase Results](phase5.png)
+ ![phase Results](ElevatorBattle/phase5.png)
 
  #### phase 6: End of Day
-![phase Results](phase6.png)
+![phase Results](ElevatorBattle/phase6.png)
 
 ### 5.2 Scenarios Analysis
 
@@ -141,7 +141,7 @@ This scenario yielded the most dramatic improvement. The "Smart Parking" logic r
 * **Wait Time Improvement:** **+94.3%**
 * **Trip Time Improvement:** **+87.6%**
 
-![Morning Rush Results](Morning_Rush_results.jpeg)
+![Morning Rush Results](ElevatorBattle/Morning_Rush_results.jpeg)
 
 
 #### Scenario 2: Stress Test
@@ -149,7 +149,7 @@ Under chaotic conditions with random spawning, the Improved algorithm's ability 
 * **Wait Time Improvement:** **+47.8%**
 * **Trip Time Improvement:** **+25.5%**
 
-![Stress Test Results](Stress_test-results.jpeg)
+![Stress Test Results](ElevatorBattle/Stress_test-results.jpeg)
 
 
 #### Scenario 3: Lunch Rush
@@ -157,7 +157,7 @@ Handling bidirectional traffic (People leaving offices + People returning). The 
 * **Wait Time Improvement:** **+30.9%**
 * **Trip Time Improvement:** **+13.2%**
 
-![Lunch Rush Results](Lunch-rush-results.jpeg)
+![Lunch Rush Results](ElevatorBattle/Lunch-rush-results.jpeg)
 
 
 #### Scenario 4: Lunch Return
@@ -165,7 +165,7 @@ Similar to Morning Rush but with higher density. The algorithm successfully prio
 * **Wait Time Improvement:** **+30.3%**
 * **Trip Time Improvement:** **+13.9%**
 
-![Lunch Return Results](Lunch-Return-Results.jpeg)
+![Lunch Return Results](ElevatorBattle/Lunch-Return-Results.jpeg)
 
 
 #### Scenario 5: End of Day
@@ -173,7 +173,7 @@ Heavy downward traffic. The Improved algorithm utilized capacity efficiently by 
 * **Wait Time Improvement:** **+33.8%**
 * **Trip Time Improvement:** **+15.7%**
 
-![End of Day Results](End-of-Day-results.jpeg)
+![End of Day Results](ElevatorBattle/End-of-Day-results.jpeg)
 
 
 ---
@@ -222,3 +222,4 @@ Heavy downward traffic. The Improved algorithm utilized capacity efficiently by 
 4.  **Select Scenario:**
 
     Use the top navigation bar to select **"Full Day Cycle"** to replicate the results presented above.
+
