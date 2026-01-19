@@ -1,0 +1,19 @@
+{
+  "floors": 10,
+  "elevators": 3,
+  "maxCapacity": 8,
+  "mode": "DETAILED_DAY_FLOW", 
+  "floorPriorities": {
+    "0": 1.0, 
+    "1": 0.5,
+    "9": 2.0 
+  },
+  "initialPeople": {
+    "0": 5,
+    "5": 2
+  },
+  "timeline": [
+    { "timeStep": 10, "source": 0, "destination": 9, "count": 3 },
+    { "timeStep": 15, "source": 5, "destination": 0, "count": 1 }
+  ]
+}
