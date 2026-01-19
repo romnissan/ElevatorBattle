@@ -103,7 +103,7 @@ We evaluated performance across 6 distinct phases:
 2.  **Lunch Rush:** Offices $\leftrightarrow$ Cafeteria/Lobby.
 3.  **Lunch Return:** Lobby/Cafeteria $\to$ Offices.
 4.  **End of Day:** Offices $\to$ Lobby.
-5.  **Stress Test 1 & 2:** High-frequency random noise.
+5.  **Stress Test:** High-frequency random noise.
 6.  **Full Day Cycle:** A continuous sequence of all above phases.
 
 ---
@@ -222,4 +222,5 @@ Heavy downward traffic. The Improved algorithm utilized capacity efficiently by 
 4.  **Select Scenario:**
 
     Use the top navigation bar to select **"Full Day Cycle"** to replicate the results presented above.
+
 
