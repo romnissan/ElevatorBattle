@@ -11,6 +11,8 @@ The **Elevator Dispatching Problem** is a classic optimization challenge in oper
 
 In high-rise buildings, standard First-Come-First-Serve (FCFS) algorithms often fail during peak traffic hours, leading to "bunching" (multiple elevators serving the same floor) and excessive queuing. This project implements and compares a baseline **Naive Algorithm** against a heuristic-based **Improved Algorithm** designed with zoning strategies, ETA minimization, and anticipatory parking.
 
+<video src="./ElevatorBattle/elevatorSim-Demo.mp4" controls="controls" style="max-width: 100%;">
+</video>
 ---
 
 ## 2. Background & Motivation
@@ -30,8 +32,8 @@ We implemented two distinct control strategies within a discrete-event simulatio
 
 ### 3.1 Baseline: The Naive Algorithm
 The Naive algorithm operates on a strict **First-Come-First-Serve (FCFS)** basis.
-* **Logic:** The controller iterates through floors. Upon finding the *first* floor with a waiting queue, it assigns the *first* available elevator.
-* **Constraint:** Once an elevator accepts a request, it is "locked" to that destination. It does not scan for other passengers along its path, nor does it re-optimize based on proximity.
+* **Logic:** The controller iterates through floors. Upon finding the *first* floor with a waiting queue, it assigns the *first* available elevator. 
+* **Constraint:** Unlike real-world scenarios where a full elevator might still stop despite being unable to board more passengers, our Naive algorithm bypasses floors when at capacity and dispatches a different available elevator instead, which improves the baseline performance.
 
 ### 3.2 The Improved Algorithm
 The Improved Algorithm utilizes a multi-phase heuristic strategy involving **Active Request Interception** and **Smart Parking**.
@@ -181,13 +183,38 @@ Heavy downward traffic. The Improved algorithm utilized capacity efficiently by 
 ## 6. Conclusions
 
 ### 6.1 What Worked Well
-1.  **Deficit-Based Parking:** The decision to incorporate `currentPopulation` into the parking logic was decisive. In the Morning Rush, the algorithm essentially dedicated the entire fleet to the Lobby without explicit hard-coding, purely because the population count at Floor 0 created a massive "Deficit" score.
+1.  **Deficit-Based Parking:** The decision to incorporate `currentPopulation` and `floorPriority` into the parking logic was decisive. In the Morning Rush, the algorithm essentially dedicated the entire fleet to the Lobby without explicit hard-coding, purely because the population count and the high priority at Floor 0 created a massive "Deficit" score.
 2.  **Stickiness Factor:** The `+1.2` stickiness bonus in `ImprovedController.ts` successfully prevented "Thrashing" (elevators vibrating between empty floors), saving active ticks and energy.
 3.  **Phase Adaptability:** The algorithm required no manual mode switching; it adapted to Morning vs. Lunch patterns purely based on the changing population data on the floors.
 
 ### 6.2 Tradeoffs & Limitations
 * **Computational Cost:** The Improved controller runs $O(N \cdot M)$ calculations per tick (where N=Elevators, M=Floors) to calculate deficits, whereas the Naive approach is $O(M)$. In extremely large skyscrapers (100+ floors), this could impact simulation speed.
 
+
+### 6.3 Comparison with Industry Standards
+
+Our **Improved Algorithm** offers a hybrid approach that outperforms traditional industry standards in specific scenarios by utilizing **direct simulation state access** (real-time queue depths) and proactive positioning.
+
+#### 1. VS. Collective Control (SCAN)
+* **How it works:** The elevator acts like a bus, moving continuously in one direction (e.g., UP) and stopping at every floor with a request until it reaches the top, then reversing.
+* **Where our algorithm wins:** **The "Morning Rush" Idle Problem.**
+    * *Scenario:* In a standard SCAN system, after an elevator drops a passenger at the 10th floor, it remains there idle until a new button is pressed. During a morning rush, this forces the next person at the Lobby to wait for the elevator to travel all the way down from floor 10.
+    * *Our Solution:* The **Improved Algorithm** utilizes **Smart Parking**. It detects that the Lobby (Floor 0) has a high priority or population density and automatically returns the idle elevator to the Lobby immediately after the drop-off, ensuring zero wait time for the next incoming passenger.
+
+#### 2. VS. Group Control (ETA Dispatch)
+* **How it works:** When a button is pressed, a central controller calculates the "Estimated Time of Arrival" for every elevator and assigns the call to the one that can arrive soonest.
+* **Where our algorithm wins:** **The "Hidden Crowd" Problem.**
+    * *Scenario:* 20 people are waiting at the Cafeteria. They press the "UP" button *once*. A standard ETA system sees "1 active call" and dispatches a single elevator. That elevator arrives, fills up with 8 people, and leaves 12 stranded, requiring them to press the button again and wait for a second cycle.
+    * *Our Solution:* Our algorithm reads the exact `waitingQueue.length` (e.g., 20 people). It calculates a **Fleet Deficit** and realizes that a single elevator (capacity 8) is insufficient. It can proactively adjust the fleet distribution to send multiple elevators to the Cafeteria to handle the volume in a single wave.
+
+#### 3. VS. Destination Control System (DCS)
+* **How it works:** Passengers select their destination floor on a keypad in the lobby *before* entering. The system groups passengers going to the same floors into the same elevator to minimize stops.
+* **Where our algorithm wins:**
+    * **Scenario A: The "Piggybacking" Efficiency (Interception).**
+      DCS systems are often rigid; once a group is assigned to Elevator A, the plan is fixed. If a new passenger appears on Floor 3 wanting to go UP, and Elevator B is passing by floor 3 on its way to floor 8, DCS might not stop Elevator B because it wasn't pre-planned. Our algorithm dynamically identifies Elevator B as a **Moving Candidate** and modifies its path to "intercept" the new passenger, reducing overall wait time.
+    
+    * **Scenario B: Stress Test (Chaotic Random Traffic).**
+      DCS relies on forming groups of people with similar destinations. In a "Stress Test" scenario where requests are completely random (e.g., Floor 2 to 9, Floor 7 to 3, Floor 4 to 6), distinct groups do not form, causing the DCS optimization logic to falter. Our algorithm shines here by treating each request independently and calculating the optimal pickup cost in real-time, effectively managing chaotic flow without relying on the pre-existence of structured groups.
 ---
 
 ## 7. Installation & Execution
@@ -220,7 +247,5 @@ Heavy downward traffic. The Improved algorithm utilized capacity efficiently by 
     *Client runs on http://localhost:3000.*
 
 4.  **Select Scenario:**
-
     Use the top navigation bar to select **"Full Day Cycle"** to replicate the results presented above.
-
 
