@@ -11,8 +11,11 @@ The **Elevator Dispatching Problem** is a classic optimization challenge in oper
 
 In high-rise buildings, standard First-Come-First-Serve (FCFS) algorithms often fail during peak traffic hours, leading to "bunching" (multiple elevators serving the same floor) and excessive queuing. This project implements and compares a baseline **Naive Algorithm** against a heuristic-based **Improved Algorithm** designed with zoning strategies, ETA minimization, and anticipatory parking.
 
-<video src="./ElevatorBattle/elevatorSim-Demo.mp4" controls="controls" style="max-width: 100%;">
-</video>
+
+
+https://github.com/user-attachments/assets/f05b7fed-7fc3-44d7-9cba-fa4f650b1ffa
+
+
 ---
 
 ## 2. Background & Motivation
@@ -248,4 +251,5 @@ Our **Improved Algorithm** offers a hybrid approach that outperforms traditional
 
 4.  **Select Scenario:**
     Use the top navigation bar to select **"Full Day Cycle"** to replicate the results presented above.
+
 
